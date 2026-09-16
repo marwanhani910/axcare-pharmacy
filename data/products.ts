@@ -1,7 +1,9 @@
 export interface Product {
   id: string;
   name: string;
+  nameAr?: string;
   category: "Medicines" | "Vitamins" | "Skincare" | "Baby Care" | "Equipment";
+  badgeAr?: string;
   price: string;
   image: string; // Emoji icon or image URL path
   badge: string;
