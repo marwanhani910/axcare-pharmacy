@@ -4,13 +4,14 @@ import React, { use } from "react";
 import Link from "next/link";
 import { PRODUCTS } from "@/data/products";
 import { useCart } from "@/context/CartContext";
+import { useLanguage } from "@/context/languagecontext";
 
-const CATEGORY_MAP: Record<string, string> = {
-  medicines: "Medicines",
-  vitamins: "Vitamins",
-  skincare: "Skincare",
-  "baby-care": "Baby Care",
-  equipment: "Equipment",
+const CATEGORY_MAP: Record<string, { en: string; ar: string }> = {
+  medicines: { en: "Medicines", ar: "الأدوية" },
+  vitamins: { en: "Vitamins", ar: "الفيتامينات" },
+  skincare: { en: "Skincare", ar: "العناية بالبشرة" },
+  "baby-care": { en: "Baby Care", ar: "عناية الطفل" },
+  equipment: { en: "Equipment", ar: "الأجهزة الطبية" },
 };
 
 export default function CategoryPage({
@@ -20,13 +21,15 @@ export default function CategoryPage({
 }) {
   const { slug } = use(params);
   const { addToCart } = useCart();
+  const { lang, t } = useLanguage();
 
-  const categoryTitle = CATEGORY_MAP[slug] || slug.replace("-", " ");
+  const categoryObj = CATEGORY_MAP[slug];
+  const categoryTitle = categoryObj ? categoryObj[lang] : slug.replace("-", " ");
 
   const filteredProducts = PRODUCTS.filter(
     (product) =>
       product.category.toLowerCase().replace(/\s+/g, "-") === slug ||
-      product.category.toLowerCase() === categoryTitle.toLowerCase()
+      product.category.toLowerCase() === (categoryObj?.en.toLowerCase() || slug)
   );
 
   return (
@@ -37,7 +40,7 @@ export default function CategoryPage({
           href="/"
           className="text-xs font-bold text-cyan-700 hover:text-cyan-800 transition flex items-center gap-1.5"
         >
-          ← Back to All Categories
+          {t("backToHome") || "← Back to All Categories"}
         </Link>
       </div>
 
@@ -47,7 +50,9 @@ export default function CategoryPage({
           {categoryTitle}
         </h1>
         <p className="text-xs text-slate-500 mt-1">
-          Showing {filteredProducts.length} items in {categoryTitle}
+          {lang === "ar"
+            ? `عرض ${filteredProducts.length} منتج في قسم ${categoryTitle}`
+            : `Showing ${filteredProducts.length} items in ${categoryTitle}`}
         </p>
       </div>
 
@@ -55,13 +60,13 @@ export default function CategoryPage({
       {filteredProducts.length === 0 ? (
         <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center my-4">
           <p className="text-sm font-bold text-slate-800">
-            No products found in this category yet.
+            {lang === "ar" ? "لم يتم العثور على منتجات في هذا القسم بعد." : "No products found in this category yet."}
           </p>
           <Link
             href="/"
             className="mt-3 inline-block text-xs text-cyan-600 font-bold hover:underline"
           >
-            Return to Homepage
+            {lang === "ar" ? "العودة إلى الصفحة الرئيسية" : "Return to Homepage"}
           </Link>
         </div>
       ) : (
@@ -77,23 +82,23 @@ export default function CategoryPage({
                     {product.image}
                   </span>
                   <span className="bg-cyan-50 text-cyan-700 border border-cyan-200 text-[10px] font-bold px-2.5 py-1 rounded-full">
-                    {product.badge}
+                    {lang === "ar" ? (product.badgeAr || product.badge) : product.badge}
                   </span>
                 </div>
                 <h3 className="font-bold text-slate-900 text-sm leading-snug mb-2">
-                  {product.name}
+                  {lang === "ar" ? (product.nameAr || product.name) : product.name}
                 </h3>
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between mt-4">
                 <span className="font-extrabold text-cyan-800 text-sm">
-                  {product.price}
+                  {product.price} {lang === "ar" ? "ج.م" : "EGP"}
                 </span>
                 <button
                   onClick={() => addToCart(product)}
                   className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition shadow-sm active:scale-95"
                 >
-                  + Add
+                  {t("addToCart")}
                 </button>
               </div>
             </div>

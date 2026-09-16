@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
+import { LanguageProvider } from "@/context/languagecontext"; // 1. Add this import
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} min-h-screen flex flex-col justify-between`}>
-        <CartProvider>
-          <Header />
-          <div className="flex-grow">{children}</div>
-          <Footer />
-        </CartProvider>
+        <LanguageProvider> {/* 2. Wrap your app here */}
+          <CartProvider>
+            <Header />
+            <div className="flex-grow">{children}</div>
+            <Footer />
+          </CartProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

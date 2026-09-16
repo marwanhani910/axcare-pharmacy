@@ -1,19 +1,24 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/context/languagecontext";
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-gradient-to-r from-cyan-800 to-teal-900 text-white py-12 px-4 font-sans">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         {/* Left Column: Hero Text */}
         <div className="space-y-4">
           <span className="inline-block bg-cyan-500/20 text-cyan-200 border border-cyan-400/30 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-            ⚡ Express 30-60 Min Delivery
+            {t("heroBadge") || "⚡ Express 30-60 Min Delivery"}
           </span>
           <h1 className="text-3xl sm:text-5xl font-black leading-tight">
-            Your Health & Pharmacy Essentials, Delivered Fast.
+            {t("heroTitle") || "Your Health & Pharmacy Essentials, Delivered Fast."}
           </h1>
           <p className="text-sm sm:text-base text-cyan-100/90 leading-relaxed max-w-xl">
-            Order authentic medicines, vitamins, skincare, and medical supplies online with licensed pharmacist consultation and instant home delivery.
+            {t("heroDesc") || "Order authentic medicines, vitamins, skincare, and medical supplies online with licensed pharmacist consultation and instant home delivery."}
           </p>
           <div className="pt-2 flex flex-wrap gap-3">
             <Link
@@ -23,13 +28,13 @@ export default function Hero() {
               <svg className="w-4 h-4 text-cyan-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
               </svg>
-              Upload Prescription Now
+              {t("uploadPrescription") || "Upload Prescription Now"}
             </Link>
             <Link
               href="/cart"
               className="bg-cyan-700/60 hover:bg-cyan-700 text-white border border-cyan-500/40 font-bold text-xs sm:text-sm px-6 py-3.5 rounded-xl transition"
             >
-              View Cart & Orders
+              {t("viewCart") || "View Cart & Orders"}
             </Link>
           </div>
         </div>
@@ -43,18 +48,22 @@ export default function Hero() {
               </svg>
             </div>
             <div>
-              <h3 className="text-base font-bold text-white">Have a Rx Prescription?</h3>
-              <p className="text-xs text-cyan-200">Skip searching — upload doctor note directly</p>
+              <h3 className="text-base font-bold text-white">
+                {t("rxCardTitle") || "Have a Rx Prescription?"}
+              </h3>
+              <p className="text-xs text-cyan-200">
+                {t("rxCardSubtitle") || "Skip searching — upload doctor note directly"}
+              </p>
             </div>
           </div>
           <p className="text-xs text-cyan-100/80 leading-relaxed">
-            Our certified pharmacists will process your prescription, verify health insurance coverage, and assemble your order immediately.
+            {t("rxCardDesc") || "Our certified pharmacists will process your prescription, verify health insurance coverage, and assemble your order immediately."}
           </p>
           <Link
             href="/upload-prescription"
             className="block text-center w-full bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-extrabold text-xs py-3 rounded-xl transition"
           >
-            Upload Rx Image
+            {t("uploadRxBtn") || "Upload Rx Image"}
           </Link>
         </div>
       </div>

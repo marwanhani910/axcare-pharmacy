@@ -5,18 +5,21 @@ import React, { createContext, useContext, useState } from "react";
 export interface CartItem {
   id: string;
   name: string;
+  nameAr?: string;
   price: string;
+  image?: string;
   quantity: number;
 }
 
 interface CartContextType {
   cart: CartItem[];
-  addToCart: (product: { id: string; name: string; price: string }) => void;
+  addToCart: (product: { id: string; name: string; nameAr?: string; price: string; image?: string }) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, delta: number) => void;
   clearCart: () => void;
   totalItems: number;
   subtotal: number;
+  totalPrice: number; // Aliased for convenience
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -24,7 +27,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const addToCart = (product: { id: string; name: string; price: string }) => {
+  const addToCart = (product: { id: string; name: string; nameAr?: string; price: string; image?: string }) => {
     setCart((prevCart) => {
       const existingIndex = prevCart.findIndex((item) => item.id === product.id);
       if (existingIndex > -1) {
@@ -59,7 +62,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const subtotal = cart.reduce((sum, item) => {
-    const numericPrice = parseFloat(item.price.replace(/[^0-9.]/g, "")) || 0;
+    // Safely strips out letters and currency symbols like EGP or ج.م
+    const cleanStr = item.price.replace(/[^\d.]/g, "");
+    const numericPrice = parseFloat(cleanStr) || 0;
     return sum + numericPrice * item.quantity;
   }, 0);
 
@@ -73,6 +78,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         clearCart,
         totalItems,
         subtotal,
+        totalPrice: subtotal,
       }}
     >
       {children}
