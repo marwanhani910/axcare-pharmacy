@@ -10,16 +10,11 @@ export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300 font-sans mt-16 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        {/* Col 1: Brand Info using logo.jpeg */}
+        {/* Col 1: Contact Us & Brand Info */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <div className="relative w-8 h-8 overflow-hidden rounded-lg">
-              <Image
-                src="/logo.jpeg"
-                alt="AxCare Pharmacy Logo"
-                fill
-                className="object-cover"
-              />
+            <div className="w-8 h-8 rounded-lg bg-cyan-600 flex items-center justify-center font-black text-white text-lg">
+              +
             </div>
             <span className="text-xl font-extrabold text-white tracking-tight">
               AxCare<span className="text-cyan-400">Pharmacy</span>
@@ -30,8 +25,30 @@ export default function Footer() {
               ? "صيدليتك الإلكترونية المرخصة والموثوقة. توصيل سريع للأدوية والمكملات الغذائية والعناية الشخصية والأجهزة الطبية خلال ٣٠-٦٠ دقيقة."
               : "Your trusted licensed online pharmacy. Express delivery for medications, health supplements, personal care, and medical equipment within 30–60 minutes."}
           </p>
-          <div className="text-xs text-cyan-400 font-bold">
-            {lang === "ar" ? "📞 الخط الساخن: ١٩٩٩٩ (متاح ٢٤/٧)" : "📞 Hotline: 19999 (24/7 Available)"}
+          
+          {/* Contact Details Section */}
+          <div className="space-y-2 text-xs text-slate-300 pt-2 border-t border-slate-800">
+            <p className="font-bold text-white uppercase tracking-wider">
+              {lang === "ar" ? "اتصل بنا" : "Contact Us"}
+            </p>
+            <p className="text-slate-400">
+              {lang === "ar" 
+                ? "📍 العنوان: شارع التسجيل، التجمع الخامس، القاهرة، مصر" 
+                : "📍 Address: التسعين Street, 5th Settlement, Cairo, Egypt"}
+            </p>
+            <p className="text-cyan-400 font-bold">
+              {lang === "ar" ? "📞 الخط الساخن: ١٩٩٩٩" : "📞 Hotline: 19999"}
+            </p>
+            <p>
+              <a 
+                href="https://wa.me/201000000000" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-emerald-400 hover:underline font-bold"
+              >
+                {lang === "ar" ? "🟢 واتساب: ٠١٠٠٠٠٠٠٠٠٠" : "🟢 WhatsApp: +20 100 000 0000"}
+              </a>
+            </p>
           </div>
         </div>
 
