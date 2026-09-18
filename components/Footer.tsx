@@ -14,10 +14,15 @@ export default function Footer() {
         <div className="space-y-4">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-cyan-600 flex items-center justify-center font-black text-white text-lg">
-              +
-            </div>
+           <Image 
+                src="/logo.jpeg" 
+                alt="AxCare Pharmacy Logo" 
+                fill 
+                className="object-cover"
+              />
             <span className="text-xl font-extrabold text-white tracking-tight">
               AxCare<span className="text-cyan-400">Pharmacy</span>
+            +
             </span>
           </div>
           <p className="text-xs text-slate-400 leading-relaxed">
