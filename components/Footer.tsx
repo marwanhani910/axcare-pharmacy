@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useLanguage } from "@/context/languagecontext";
 
 export default function Footer() {
-  const { lang, t } = useLanguage();
+  const { lang } = useLanguage();
 
   return (
     <footer className="bg-slate-900 text-slate-300 font-sans mt-16 border-t border-slate-800">
@@ -13,16 +13,16 @@ export default function Footer() {
         {/* Col 1: Contact Us & Brand Info */}
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-cyan-600 flex items-center justify-center font-black text-white text-lg">
-           <Image 
+            <div className="relative w-8 h-8 rounded-lg bg-cyan-600 flex items-center justify-center overflow-hidden">
+              <Image 
                 src="/logo.jpeg" 
                 alt="AxCare Pharmacy Logo" 
                 fill 
                 className="object-cover"
               />
+            </div>
             <span className="text-xl font-extrabold text-white tracking-tight">
-              AxCare<span className="text-cyan-400">Pharmacy</span>
-            +
+              AxCare<span className="text-cyan-400">Pharmacy</span>+
             </span>
           </div>
           <p className="text-xs text-slate-400 leading-relaxed">
@@ -38,20 +38,20 @@ export default function Footer() {
             </p>
             <p className="text-slate-400">
               {lang === "ar" 
-                ? "📍 العنوان: شارع التسجيل، التجمع الخامس، القاهرة، مصر" 
-                : "📍 Address: التسعين Street, 5th Settlement, Cairo, Egypt"}
+                ? "📍 العنوان: 22-أ-عمارات نيركو-الشطر الثالث-زهراء المعادي" 
+                : "📍 Address: 22-A-nerco buildings-Alshatr thaleth-zahra almaadi"}
             </p>
             <p className="text-cyan-400 font-bold">
-              {lang === "ar" ? "📞 الخط الساخن: ١٩٩٩٩" : "📞 Hotline: 19999"}
+              {lang === "ar" ? "📞 الخط الساخن: 0225198943" : "📞 Hotline: 0225198943"}
             </p>
             <p>
               <a 
-                href="https://wa.me/201000000000" 
+                href="https://wa.me/01039239216" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-emerald-400 hover:underline font-bold"
               >
-                {lang === "ar" ? "🟢 واتساب: ٠١٠٠٠٠٠٠٠٠٠" : "🟢 WhatsApp: +20 100 000 0000"}
+                {lang === "ar" ? "🟢 واتساب: 01039239216" : "🟢 WhatsApp: 01039239216"}
               </a>
             </p>
           </div>
@@ -70,7 +70,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="/upload-prescription" className="hover:text-cyan-400 transition">
-                {lang === "ar" ? "رفع روشتة الطبيب" : "Upload Doctor's Prescription"}
+                {lang === "ar" ? "رفع روشتة الطبيب" : "Upload Doctor&apos;s Prescription"}
               </Link>
             </li>
             <li>
