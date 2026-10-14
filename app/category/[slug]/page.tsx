@@ -2,7 +2,7 @@
 
 import React, { use } from "react";
 import Link from "next/link";
-import { PRODUCTS } from "../../../data/products";
+import { PRODUCTS } from "../../data/products";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/languagecontext";
 
@@ -27,7 +27,7 @@ export default function CategoryPage({
   const categoryTitle = categoryObj ? categoryObj[lang] : slug.replace("-", " ");
 
   const filteredProducts = PRODUCTS.filter(
-    (product) =>
+    (product: any) =>
       product.category.toLowerCase().replace(/\s+/g, "-") === slug ||
       product.category.toLowerCase() === (categoryObj?.en.toLowerCase() || slug)
   );
@@ -71,7 +71,7 @@ export default function CategoryPage({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
+          {filteredProducts.map((product: any) => (
             <div
               key={product.id}
               className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between"
