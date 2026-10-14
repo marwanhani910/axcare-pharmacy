@@ -2,9 +2,20 @@
 
 import React, { use } from "react";
 import Link from "next/link";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS } from "@/data/products_generated";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/languagecontext";
+
+interface Product {
+  id: string;
+  name: string;
+  nameAr?: string;
+  category: string;
+  price: string;
+  image: string;
+  badge?: string;
+  badgeAr?: string;
+}
 
 const CATEGORY_MAP: Record<string, { en: string; ar: string }> = {
   medicines: { en: "Medicines", ar: "الأدوية" },
@@ -26,8 +37,13 @@ export default function CategoryPage({
   const categoryObj = CATEGORY_MAP[slug];
   const categoryTitle = categoryObj ? categoryObj[lang] : slug.replace("-", " ");
 
-  const filteredProducts = PRODUCTS.filter(
-    (product: any) =>
+  const typedProducts: Product[] = PRODUCTS.map((p: any) => ({
+    ...p,
+    id: String(p.id),
+  }));
+
+  const filteredProducts = typedProducts.filter(
+    (product) =>
       product.category.toLowerCase().replace(/\s+/g, "-") === slug ||
       product.category.toLowerCase() === (categoryObj?.en.toLowerCase() || slug)
   );
@@ -71,7 +87,7 @@ export default function CategoryPage({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product: any) => (
+          {filteredProducts.map((product) => (
             <div
               key={product.id}
               className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition flex flex-col justify-between"
@@ -92,7 +108,7 @@ export default function CategoryPage({
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between mt-4">
                 <span className="font-extrabold text-cyan-800 text-sm">
-                  {product.price} {lang === "ar" ? "ج.م" : "EGP"}
+                  {product.price}
                 </span>
                 <button
                   onClick={() => addToCart(product)}
