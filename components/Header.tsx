@@ -27,7 +27,7 @@ export default function Header() {
       {/* Top Banner */}
       <div className="bg-slate-900 text-slate-300 text-[11px] py-1.5 px-4 flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <span>📞 Hotline: <strong className="text-white">19999</strong></span>
+          <span>📞 Hotline: <strong className="text-white">0225198943</strong></span>
           <span className="hidden sm:inline">⚡ Express Delivery in 30–60 mins</span>
         </div>
         <Link
