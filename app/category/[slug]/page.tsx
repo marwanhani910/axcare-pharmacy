@@ -2,7 +2,7 @@
 
 import React, { use } from "react";
 import Link from "next/link";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS } from "../../../data/products";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/languagecontext";
 
